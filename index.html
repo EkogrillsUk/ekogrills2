@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EKOGRILLS UK — Authentic Flame Grilled BBQ</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#d4af37',
+                        'gold-hover': '#b59226',
+                        dark: '#0d0d0d',
+                        darkcard: '#161616',
+                        flame: '#8b0000',
+                        'flame-light': '#b22222',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-header {
+            background: rgba(13, 13, 13, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glow-gold {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+        }
+        .glow-flame {
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.4);
+        }
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d0d0d;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col justify-between selection:bg-gold selection:text-black">
+
+    <!-- NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-header border-b border-neutral-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" 
+                     alt="EKOGRILLS UK Logo" 
+                     class="h-14 w-14 rounded-full object-cover border-2 border-gold shadow-md group-hover:scale-105 transition-transform duration-300"
+                     onerror="this.src='https://placehold.co/100x100/161616/d4af37?text=EKOGRILLS'">
+                <div>
+                    <span class="text-xl font-black tracking-wider text-white block leading-tight">EKOGRILLS <span class="text-gold">UK</span></span>
+                    <span class="text-[10px] tracking-widest uppercase text-gray-400 block font-medium">The Flavour of Mercy</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                <a href="#menu" class="hover:text-gold transition-colors">Menu Categories</a>
+                <a href="#custom-builder" class="hover:text-gold transition-colors text-gold flex items-center gap-1.5 font-semibold">
+                    <i class="fa-solid fa-wand-magic-sparkles text-xs"></i> Platter Builder
+                </a>
+                <a href="#qr-catering" class="hover:text-gold transition-colors">WhatsApp & Catering</a>
+                <a href="#contact" class="hover:text-gold transition-colors">Contact</a>
+            </nav>
+
+            <!-- Actions & Cart Button -->
+            <div class="flex items-center gap-4">
+                <button onclick="toggleCartDrawer()" class="relative p-2.5 rounded-full bg-neutral-900 border border-neutral-700 hover:border-gold text-white transition-all duration-300 flex items-center justify-center">
+                    <i class="fa-solid fa-utensils text-lg text-gold"></i>
+                    <span id="cart-count-badge" class="absolute -top-1.5 -right-1.5 bg-flame text-white text-[10px] font-bold h-5 w-5 rounded-full flex items-center justify-center border-2 border-dark">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO BANNER -->
+    <section class="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden border-b border-neutral-800">
+        <!-- Background Overlay / Decorative Flame Glow -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-flame/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-0 right-10 w-[300px] h-[300px] bg-gold/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Text Content -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-flame/30 border border-flame/50 text-gold text-xs font-semibold mb-6">
+                        <i class="fa-solid fa-fire text-amber-500 animate-pulse"></i> Authentic Nigerian Flame-Grilled BBQ
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-none mb-6">
+                        Savour the Authentic <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold via-amber-400 to-amber-200">Smokey Flame</span> Grill
+                    </h1>
+                    <p class="text-neutral-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+                        Handcrafted Suya, spiced wings, tender lamb chops, and croaker fish. Prepared daily with our secret signature Yaji spices and flame-grilled to perfection.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+                        <a href="#menu" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-gold to-amber-600 hover:from-amber-500 hover:to-gold text-neutral-950 font-bold rounded-xl shadow-lg glow-gold transition-all duration-300 text-center flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-utensils"></i> View Full Menu
+                        </a>
+                        <a href="#custom-builder" class="w-full sm:w-auto px-8 py-4 bg-neutral-900 hover:bg-neutral-800 text-white font-semibold rounded-xl border border-neutral-700 hover:border-gold transition-all duration-300 text-center flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-gold"></i> Build Custom Platter
+                        </a>
+                    </div>
+
+                    <!-- Highlights Banner -->
+                    <div class="mt-10 pt-8 border-t border-neutral-800/80 grid grid-cols-3 gap-4 text-center lg:text-left">
+                        <div>
+                            <span class="block text-xl sm:text-2xl font-bold text-white">100%</span>
+                            <span class="text-xs text-neutral-400">Fresh Daily</span>
+                        </div>
+                        <div>
+                            <span class="block text-xl sm:text-2xl font-bold text-gold">Limited</span>
+                            <span class="text-xs text-neutral-400">Daily Stock Limits</span>
+                        </div>
+                        <div>
+                            <span class="block text-xl sm:text-2xl font-bold text-white">UK Wide</span>
+                            <span class="text-xs text-neutral-400">Pre-Orders & Catering</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Visual Display (Branded Badge Card) -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md bg-darkcard p-6 rounded-3xl border border-neutral-800 shadow-2xl glow-gold text-center">
+                        <div class="absolute -top-4 -right-4 bg-flame text-gold font-bold px-4 py-1.5 rounded-full text-xs border border-gold/40 shadow-lg flex items-center gap-1">
+                            <i class="fa-solid fa-shield-halved"></i> Daily Fresh Stock
+                        </div>
+                        
+                        <img src="https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" 
+                             alt="Ekogrills Seal" 
+                             class="w-48 h-48 mx-auto rounded-full object-cover border-4 border-gold p-1 shadow-2xl mb-6"
+                             onerror="this.src='https://placehold.co/200x200/161616/d4af37?text=EKOGRILLS'">
+
+                        <h3 class="text-xl font-bold text-white">The Flavour of Mercy</h3>
+                        <p class="text-xs text-neutral-400 mt-1 mb-4">Authentic BBQ • Private Catering • Events</p>
+                        
+                        <div class="p-3 bg-neutral-900 rounded-xl border border-neutral-800 flex items-center justify-between text-xs text-neutral-300">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-clock text-gold"></i> Fast Pickup & Delivery</span>
+                            <span class="text-gold font-bold">Open Orders</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN MENU SECTION -->
+    <main id="menu" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-grow">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-3">Explore Our <span class="text-gold">BBQ Menu</span></h2>
+            <p class="text-neutral-400 text-sm sm:text-base">All protein items are freshly grilled. Stock is updated in real-time based on daily prep capacity.</p>
+        </div>
+
+        <!-- Menu Navigation Tabs -->
+        <div class="flex overflow-x-auto no-scrollbar gap-2 mb-10 pb-2 justify-start md:justify-center border-b border-neutral-800">
+            <button onclick="filterCategory('single')" id="tab-single" class="tab-btn px-5 py-3 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-300 bg-gold text-neutral-950 shadow-md">
+                Single Boxes
+            </button>
+            <button onclick="filterCategory('duo')" id="tab-duo" class="tab-btn px-5 py-3 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-300 bg-neutral-900 text-neutral-400 hover:text-white hover:bg-neutral-800">
+                Duo Mix Platters
+            </button>
+            <button onclick="filterCategory('trio')" id="tab-trio" class="tab-btn px-5 py-3 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-300 bg-neutral-900 text-neutral-400 hover:text-white hover:bg-neutral-800">
+                Trio Combos
+            </button>
+            <button onclick="filterCategory('sharing')" id="tab-sharing" class="tab-btn px-5 py-3 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-300 bg-neutral-900 text-neutral-400 hover:text-white hover:bg-neutral-800">
+                Sharing Trays
+            </button>
+        </div>
+
+        <!-- MENU ITEMS GRID -->
+        <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Dynamic JavaScript Content Injected Here -->
+        </div>
+
+        <!-- CUSTOM PLATTER BUILDER SECTION -->
+        <section id="custom-builder" class="mt-24 pt-16 border-t border-neutral-800">
+            <div class="bg-gradient-to-b from-darkcard to-neutral-950 rounded-3xl p-6 sm:p-10 border border-gold/30 shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-flame/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                    <div>
+                        <span class="inline-block px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-bold uppercase tracking-wider mb-2 border border-gold/20">
+                            Custom Combo
+                        </span>
+                        <h3 class="text-2xl sm:text-3xl font-black text-white">Build Your Own Platter</h3>
+                        <p class="text-xs sm:text-sm text-neutral-400 mt-1">Select between 3 to 6 protein items & signature sides.</p>
+                    </div>
+                    <div class="bg-neutral-900 px-4 py-3 rounded-2xl border border-neutral-800 text-right w-full md:w-auto flex justify-between md:block items-center">
+                        <span class="text-xs text-neutral-400 block">Live Total:</span>
+                        <span id="custom-builder-total" class="text-2xl font-black text-gold">£0.00</span>
+                    </div>
+                </div>
+
+                <!-- Step 1: Select Proteins -->
+                <div class="mb-8">
+                    <h4 class="text-sm font-bold text-gold uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-drumstick-bite"></i> Step 1: Choose Proteins (3 to 6 portions)
+                    </h4>
+                    <div id="builder-proteins-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Dynamic Protein Checkboxes injected via JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Step 2: Choose Sides -->
+                <div class="mb-8">
+                    <h4 class="text-sm font-bold text-gold uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-pepper-hot"></i> Step 2: Add Signature Sides (Optional)
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <label class="flex items-center justify-between p-4 bg-neutral-900 rounded-xl border border-neutral-800 cursor-pointer hover:border-gold/50 transition-all">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" onchange="updateBuilderTotal()" id="side-boli" value="5.00" class="w-5 h-5 accent-gold bg-neutral-800 border-neutral-700 rounded">
+                                <div>
+                                    <span class="font-bold text-white block text-sm">Fried Plantain (Boli)</span>
+                                    <span class="text-xs text-neutral-400">Sweet grilled plantain slices</span>
+                                </div>
+                            </div>
+                            <span class="text-gold font-bold text-sm">+£5.00</span>
+                        </label>
+                        <label class="flex items-center justify-between p-4 bg-neutral-900 rounded-xl border border-neutral-800 cursor-pointer hover:border-gold/50 transition-all">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" onchange="updateBuilderTotal()" id="side-corn" value="3.50" class="w-5 h-5 accent-gold bg-neutral-800 border-neutral-700 rounded">
+                                <div>
+                                    <span class="font-bold text-white block text-sm">Flame-Grilled Corn</span>
+                                    <span class="text-xs text-neutral-400">Buttery spiced corn on cob</span>
+                                </div>
+                            </div>
+                            <span class="text-gold font-bold text-sm">+£3.50</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Add Custom Platter Button -->
+                <div class="flex justify-end">
+                    <button onclick="addCustomPlatterToCart()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-gold to-amber-600 hover:from-amber-500 hover:to-gold text-neutral-950 font-bold rounded-xl shadow-lg glow-gold transition-all duration-300 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add Custom Platter to Order
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHATSAPP & CATERING SECTION -->
+        <section id="qr-catering" class="mt-20 pt-16 border-t border-neutral-800">
+            <div class="bg-neutral-900 rounded-3xl p-8 border border-neutral-800 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-8">
+                    <span class="px-3 py-1 bg-emerald-900/50 border border-emerald-500/30 text-emerald-400 text-xs font-bold rounded-full mb-3 inline-block">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> Direct Customer Support & Catering
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl font-bold text-white mb-3">Scan to Chat or Book Event Catering</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                        Need tailored event catering for weddings, birthdays, or corporate gatherings? Scan our QR code to connect directly with the EKOGRILLS team on WhatsApp or social channels for custom quotes and instant pre-orders.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs text-neutral-300">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-phone text-gold"></i> 07938391725</div>
+                        <div class="flex items-center gap-2"><i class="fa-brands fa-instagram text-gold"></i> @ekogrills_uk</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-envelope text-gold"></i> ekogrillsuk@outlook.com</div>
+                    </div>
+                </div>
+                <div class="lg:col-span-4 flex flex-col items-center justify-center p-4 bg-darkcard rounded-2xl border border-neutral-800">
+                    <img src="https://i.ibb.co/3ykVw5p/Socials-QR-Code.png" 
+                         alt="EKOGRILLS WhatsApp Socials QR Code" 
+                         class="w-48 h-48 rounded-xl object-contain border-2 border-gold p-1 bg-white shadow-xl mb-3"
+                         onerror="this.src='https://placehold.co/200x200/ffffff/0d0d0d?text=Scan+QR'">
+                    <span class="text-xs text-gold font-bold tracking-wide">SCAN WITH PHONE CAMERA</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- CART SLIDING DRAWER -->
+    <div id="cart-drawer-overlay" onclick="toggleCartDrawer()" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden transition-opacity duration-300"></div>
+    <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-darkcard z-50 transform translate-x-full transition-transform duration-300 ease-in-out border-l border-neutral-800 flex flex-col">
+        <!-- Cart Header -->
+        <div class="p-5 border-b border-neutral-800 flex items-center justify-between bg-neutral-900">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-basket-shopping text-gold text-lg"></i>
+                <h3 class="font-bold text-lg text-white">Your Grill Order</h3>
+            </div>
+            <button onclick="toggleCartDrawer()" class="p-2 text-neutral-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items Scrollable List -->
+        <div id="cart-items-container" class="flex-grow overflow-y-auto p-5 space-y-4">
+            <!-- Dynamic JavaScript Cart Items -->
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="p-5 border-t border-neutral-800 bg-neutral-900 space-y-4">
+            <div class="space-y-2 text-sm">
+                <div class="flex justify-between text-neutral-400">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal" class="text-white font-medium">£0.00</span>
+                </div>
+                <div class="flex justify-between text-neutral-400">
+                    <span>Delivery / Prep</span>
+                    <span id="cart-delivery-fee" class="text-white font-medium">£0.00</span>
+                </div>
+                <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-neutral-800">
+                    <span>Total Amount</span>
+                    <span id="cart-total" class="text-gold">£0.00</span>
+                </div>
+            </div>
+
+            <button onclick="openCheckoutModal()" id="btn-proceed-checkout" disabled class="w-full py-3.5 bg-gradient-to-r from-gold to-amber-600 hover:from-amber-500 hover:to-gold text-neutral-950 font-bold rounded-xl shadow-md transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                <span>Proceed to Checkout</span> <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- CHECKOUT MODAL -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden overflow-y-auto p-4 flex items-center justify-center">
+        <div class="bg-darkcard border border-neutral-800 rounded-3xl w-full max-w-xl p-6 sm:p-8 relative shadow-2xl">
+            <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex items-center gap-3 mb-6 border-b border-neutral-800 pb-4">
+                <img src="https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" alt="Ekogrills" class="w-10 h-10 rounded-full border border-gold">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Complete Your BBQ Order</h3>
+                    <p class="text-xs text-neutral-400">Provide details for collection or UK delivery</p>
+                </div>
+            </div>
+
+            <form id="checkout-form" onsubmit="handleOrderSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-neutral-300 mb-1">Full Name *</label>
+                    <input type="text" id="cust-name" required class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-neutral-300 mb-1">Phone Number (WhatsApp) *</label>
+                        <input type="tel" id="cust-phone" required placeholder="07123 456789" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-neutral-300 mb-1">Order Type *</label>
+                        <select id="cust-type" onchange="handleOrderTypeChange()" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold">
+                            <option value="collection">Collection / Pickup</option>
+                            <option value="delivery">Home Delivery (£5.00)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="delivery-address-container" class="hidden">
+                    <label class="block text-xs font-semibold text-neutral-300 mb-1">Delivery Address *</label>
+                    <textarea id="cust-address" rows="2" placeholder="Full address and postcode" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-neutral-300 mb-1">Payment Method *</label>
+                    <select id="cust-payment" class="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold">
+                        <option value="Bank Transfer">Direct Bank Transfer</option>
+                        <option value="Card Payment">Card on Pickup / Delivery</option>
+                        <option value="Cash">Cash</option>
+                    </select>
+                </div>
+
+                <div class="pt-4 border-t border-neutral-800 flex justify-between items-center">
+                    <div>
+                        <span class="text-xs text-neutral-400 block">Total Due:</span>
+                        <span id="checkout-modal-total" class="text-xl font-black text-gold">£0.00</span>
+                    </div>
+                    <button type="submit" class="px-8 py-3.5 bg-gradient-to-r from-gold to-amber-600 hover:from-amber-500 hover:to-gold text-neutral-950 font-bold rounded-xl shadow-md transition-all duration-300">
+                        Place BBQ Order
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- RECEIPT / CONFIRMATION MODAL -->
+    <div id="receipt-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden overflow-y-auto p-4 flex items-center justify-center">
+        <div class="bg-darkcard border border-gold/40 rounded-3xl w-full max-w-lg p-6 sm:p-8 relative shadow-2xl text-center">
+            <div class="w-16 h-16 bg-emerald-950 border border-emerald-500/50 rounded-full flex items-center justify-center text-emerald-400 text-2xl mx-auto mb-4">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            
+            <h3 class="text-2xl font-black text-white mb-1">Order Placed Successfully!</h3>
+            <p class="text-xs text-neutral-400 mb-6">Thank you for choosing EKOGRILLS UK</p>
+
+            <div id="receipt-details" class="bg-neutral-900 p-4 rounded-2xl border border-neutral-800 text-left text-xs space-y-2 mb-6">
+                <!-- Injected via JavaScript -->
+            </div>
+
+            <div class="p-4 bg-emerald-950/30 border border-emerald-500/30 rounded-2xl mb-6 flex items-center gap-4 text-left">
+                <img src="https://i.ibb.co/3ykVw5p/Socials-QR-Code.png" alt="EKOGRILLS QR Code" class="w-20 h-20 bg-white rounded-lg p-1 object-contain border border-gold">
+                <div>
+                    <h4 class="font-bold text-white text-sm">Scan to Send Order to WhatsApp</h4>
+                    <p class="text-[11px] text-neutral-300 mt-1">Scan or tap below to send your order summary directly to our kitchen team for instant fulfillment.</p>
+                </div>
+            </div>
+
+            <button onclick="closeReceiptModal()" class="w-full py-3.5 bg-gold text-neutral-950 font-bold rounded-xl hover:bg-gold-hover transition-colors">
+                Back to Website
+            </button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-neutral-950 border-t border-neutral-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+                <!-- Brand -->
+                <div class="flex flex-col items-center md:items-start gap-2">
+                    <div class="flex items-center gap-3">
+                        <img src="https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" alt="Ekogrills" class="w-10 h-10 rounded-full border border-gold">
+                        <span class="text-lg font-black text-white">EKOGRILLS <span class="text-gold">UK</span></span>
+                    </div>
+                    <p class="text-xs text-neutral-400">The Flavour of Mercy — Authentic Flame-Grilled BBQ Services.</p>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="space-y-2 text-xs text-neutral-300">
+                    <p><i class="fa-solid fa-phone text-gold mr-2"></i> 07938391725</p>
+                    <p><i class="fa-brands fa-instagram text-gold mr-2"></i> @ekogrills_uk</p>
+                    <p><i class="fa-solid fa-envelope text-gold mr-2"></i> ekogrillsuk@outlook.com</p>
+                </div>
+
+                <!-- Copyright -->
+                <div class="text-xs text-neutral-500 md:text-right">
+                    <p>&copy; 2026 EKOGRILLS UK. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- APPLICATION JAVASCRIPT LOGIC -->
+    <script>
+        // GLOBAL STATE & STOCK INVENTORY SYSTEM
+        // Primary protein stock levels (portions per day)
+        const proteinStock = {
+            "Suya": 10,
+            "Lamb Chops": 10,
+            "Croaker Fish Cuts": 10,
+            "Chicken Wings": 10,
+            "Turkey Wings": 10,
+            "Chicken Kebabs": 10,
+            "Chicken Thighs": 10
+        };
+
+        // Complete Menu Database
+        const menuItems = [
+            // CATEGORY 1: SINGLE PROTEIN BOXES
+            { id: "sp-1", category: "single", protein: "Suya", name: "Suya BOX", price: 36.00, desc: "Premium beef suya, sliced onions & signature Yaji spice.", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+            { id: "sp-2", category: "single", protein: "Lamb Chops", name: "Lamb Chops BOX", price: 22.00, desc: "Flame-grilled succulent lamb chops (6 portions).", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+            { id: "sp-3", category: "single", protein: "Croaker Fish Cuts", name: "Fish Cuts BOX", price: 11.00, desc: "Seasoned croaker fish cuts with spicy herb glaze (2 portions).", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+            { id: "sp-4", category: "single", protein: "Chicken Wings", name: "Chicken Wings BOX", price: 9.50, desc: "Crispy spicy flame-grilled wings (10 portions).", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+            { id: "sp-5", category: "single", protein: "Turkey Wings", name: "Turkey Wings BOX", price: 8.00, desc: "Tender peppered grilled turkey wings (2 portions).", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+            { id: "sp-6", category: "single", protein: "Chicken Kebabs", name: "Chicken Kebabs BOX", price: 10.00, desc: "Flame-grilled chicken skewers with fresh veggies (2 skewers).", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+            { id: "sp-7", category: "single", protein: "Chicken Thighs", name: "Chicken Thighs BOX", price: 7.00, desc: "Soft, juicy grilled chicken thighs (3 portions).", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+
+            // CATEGORY 2: DUO MIX PLATTERS
+            { id: "duo-1", category: "duo", proteins: ["Suya", "Chicken Wings"], name: "Suya + Wings (10)", price: 40.00, desc: "Generous Beef Suya paired with 10 flame-grilled chicken wings.", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+            { id: "duo-2", category: "duo", proteins: ["Lamb Chops", "Chicken Kebabs"], name: "Lamb Chops (6) + Kebabs (2)", price: 27.00, desc: "6 grilled lamb chops accompanied by 2 chicken skewers.", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+            { id: "duo-3", category: "duo", proteins: ["Croaker Fish Cuts", "Turkey Wings"], name: "Fish Cuts (2) + Turkey (4)", price: 17.00, desc: "Herb glazed croaker fish cuts with 4 peppered turkey wings.", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+            { id: "duo-4", category: "duo", proteins: ["Chicken Thighs", "Suya"], name: "Chicken Thighs (5) + Suya", price: 40.00, desc: "5 soft grilled thighs served alongside signature Beef Suya.", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+
+            // CATEGORY 3: TRIO COMBO PLATTERS
+            { id: "trio-1", category: "trio", proteins: ["Suya", "Chicken Wings", "Turkey Wings"], name: "The Crowd Pleaser", price: 55.00, desc: "Beef Suya + Chicken Wings (15) + Turkey Wings (6).", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+            { id: "trio-2", category: "trio", proteins: ["Lamb Chops", "Suya", "Chicken Thighs"], name: "The Pitmaster Trio", price: 65.00, desc: "Lamb Chops (6) + Beef Suya + Chicken Thighs (6).", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+            { id: "trio-3", category: "trio", proteins: ["Croaker Fish Cuts", "Chicken Wings", "Turkey Wings"], name: "Seafood & Poultry", price: 50.00, desc: "Fish Cuts (6) + Chicken Wings (12) + Turkey Wings (4).", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+            { id: "trio-4", category: "trio", proteins: ["Chicken Kebabs", "Suya", "Lamb Chops"], name: "The Feast", price: 75.00, desc: "Chicken Kebabs (6) + Beef Suya + Lamb Chops (9).", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+
+            // CATEGORY 4: SHARING TRAYS
+            { id: "share-1", category: "sharing", proteins: ["Suya", "Lamb Chops", "Chicken Wings", "Turkey Wings", "Chicken Kebabs", "Chicken Thighs"], name: "Mega Grill Platter", price: 95.00, desc: "Suya, Lamb Chops (8), Wings (15), Turkey (10), Kebabs (6) & Thighs (10).", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+            { id: "share-2", category: "sharing", proteins: ["Chicken Wings", "Turkey Wings"], name: "All-Wings Platter", price: 42.00, desc: "Chicken Wings (30) & Turkey Wings (10) in signature glazes.", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" },
+            { id: "share-3", category: "sharing", proteins: ["Suya"], name: "Suya Lovers Platter", price: 55.00, desc: "Generous cuts of Beef & Whole Chicken Suya with extra Yaji spice.", img: "https://i.ibb.co/L5CjV1f/A437-AA1F-5430-4-B4-A-9-DBB-D229-E93-F7538-L0-001-27-09-2025-08-32-19-1.jpg" }
+        ];
+
+        // Platter Builder Protein Prices
+        const builderPrices = {
+            "Suya": 12.00,
+            "Lamb Chops": 11.00,
+            "Croaker Fish Cuts": 8.00,
+            "Turkey Wings": 6.50,
+            "Chicken Kebabs": 6.00,
+            "Chicken Thighs": 5.00,
+            "Chicken Wings": 5.50
+        };
+
+        let cart = [];
+        let currentCategory = 'single';
+
+        // INITIALIZE APP ON LOAD
+        window.onload = function() {
+            renderMenu('single');
+            renderCustomBuilder();
+            updateCartUI();
+        };
+
+        // CATEGORY FILTER
+        function filterCategory(category) {
+            currentCategory = category;
+            
+            // Update tab button styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn px-5 py-3 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-300 bg-neutral-900 text-neutral-400 hover:text-white hover:bg-neutral-800";
+            });
+            const activeTab = document.getElementById(`tab-${category}`);
+            if (activeTab) {
+                activeTab.className = "tab-btn px-5 py-3 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-300 bg-gold text-neutral-950 shadow-md";
+            }
+
+            renderMenu(category);
+        }
+
+        // RENDER MENU ITEMS
+        function renderMenu(category) {
+            const grid = document.getElementById('menu-grid');
+            grid.innerHTML = '';
+
+            const filtered = menuItems.filter(item => item.category === category);
+
+            filtered.forEach(item => {
+                // Determine stock status
+                let isAvailable = true;
+                let stockBadgeText = "";
+
+                if (item.protein) {
+                    const currentStock = proteinStock[item.protein] || 0;
+                    if (currentStock <= 0) {
+                        isAvailable = false;
+                    } else {
+                        stockBadgeText = `${currentStock} left today`;
+                    }
+                } else if (item.proteins) {
+                    // Combo check if any component protein is out of stock
+                    const outOfStockProtein = item.proteins.find(p => (proteinStock[p] || 0) <= 0);
+                    if (outOfStockProtein) {
+                        isAvailable = false;
+                    }
+                }
+
+                const cardHtml = `
+                    <div class="bg-darkcard rounded-2xl border border-neutral-800 overflow-hidden flex flex-col justify-between hover:border-gold/50 transition-all duration-300 group">
+                        <div>
+                            <div class="relative h-48 overflow-hidden bg-neutral-900">
+                                <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x300/161616/d4af37?text=EKOGRILLS'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-darkcard to-transparent opacity-80"></div>
+                                
+                                ${isAvailable ? `
+                                    <span class="absolute top-3 right-3 bg-neutral-900/90 text-gold text-[10px] font-bold px-2.5 py-1 rounded-full border border-gold/30">
+                                        <i class="fa-solid fa-fire text-amber-500"></i> ${stockBadgeText || 'Freshly Prepared'}
+                                    </span>
+                                ` : `
+                                    <span class="absolute top-3 right-3 bg-flame/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full border border-white/20">
+                                        Out of Stock
+                                    </span>
+                                `}
+                            </div>
+                            <div class="p-5">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-lg font-bold text-white group-hover:text-gold transition-colors">${item.name}</h3>
+                                    <span class="text-lg font-black text-gold">£${item.price.toFixed(2)}</span>
+                                </div>
+                                <p class="text-xs text-neutral-400 leading-relaxed mb-4">${item.desc}</p>
+                            </div>
+                        </div>
+
+                        <div class="p-5 pt-0">
+                            ${isAvailable ? `
+                                <button onclick="addToCart('${item.id}')" class="w-full py-3 bg-neutral-900 hover:bg-gold text-white hover:text-neutral-950 font-bold text-sm rounded-xl border border-neutral-700 hover:border-gold transition-all duration-300 flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-cart-plus"></i> Add to Order
+                                </button>
+                            ` : `
+                                <button disabled class="w-full py-3 bg-neutral-900 text-neutral-500 font-bold text-xs rounded-xl border border-neutral-800 cursor-not-allowed">
+                                    Temporarily Not Available
+                                </button>
+                            `}
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHtml;
+            });
+        }
+
+        // RENDER CUSTOM PLATTER BUILDER
+        function renderCustomBuilder() {
+            const grid = document.getElementById('builder-proteins-grid');
+            grid.innerHTML = '';
+
+            Object.keys(builderPrices).forEach((pName) => {
+                const stock = proteinStock[pName] || 0;
+                const isAvailable = stock > 0;
+                const price = builderPrices[pName];
+
+                const itemHtml = `
+                    <label class="flex items-center justify-between p-3.5 bg-neutral-900 rounded-xl border border-neutral-800 ${isAvailable ? 'cursor-pointer hover:border-gold/50' : 'opacity-50 cursor-not-allowed'} transition-all">
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" name="builder-protein" value="${pName}" data-price="${price}" onchange="updateBuilderTotal()" ${!isAvailable ? 'disabled' : ''} class="w-5 h-5 accent-gold bg-neutral-800 border-neutral-700 rounded">
+                            <div>
+                                <span class="font-bold text-white block text-sm">${pName}</span>
+                                <span class="text-[11px] ${isAvailable ? 'text-neutral-400' : 'text-flame-light font-bold'}">
+                                    ${isAvailable ? `${stock} available` : 'Out of Stock'}
+                                </span>
+                            </div>
+                        </div>
+                        <span class="text-gold font-bold text-xs">+£${price.toFixed(2)}</span>
+                    </label>
+                `;
+                grid.innerHTML += itemHtml;
+            });
+        }
+
+        // UPDATE BUILDER TOTAL
+        function updateBuilderTotal() {
+            let total = 0;
+            const selectedProteins = document.querySelectorAll('input[name="builder-protein"]:checked');
+            selectedProteins.forEach(cb => {
+                total += parseFloat(cb.getAttribute('data-price'));
+            });
+
+            if (document.getElementById('side-boli').checked) total += 5.00;
+            if (document.getElementById('side-corn').checked) total += 3.50;
+
+            document.getElementById('custom-builder-total').innerText = `£${total.toFixed(2)}`;
+        }
+
+        // ADD CUSTOM PLATTER TO CART
+        function addCustomPlatterToCart() {
+            const selectedProteins = Array.from(document.querySelectorAll('input[name="builder-protein"]:checked')).map(cb => cb.value);
+
+            if (selectedProteins.length < 3 || selectedProteins.length > 6) {
+                alert("Please select between 3 to 6 protein options for your custom platter.");
+                return;
+            }
+
+            let price = 0;
+            selectedProteins.forEach(p => price += builderPrices[p]);
+
+            const sides = [];
+            if (document.getElementById('side-boli').checked) {
+                sides.push("Fried Plantain (Boli)");
+                price += 5.00;
+            }
+            if (document.getElementById('side-corn').checked) {
+                sides.push("Flame-Grilled Corn");
+                price += 3.50;
+            }
+
+            const customItem = {
+                id: 'custom-' + Date.now(),
+                name: `Custom Platter (${selectedProteins.length} Proteins)`,
+                desc: `${selectedProteins.join(', ')} ${sides.length > 0 ? '+ ' + sides.join(', ') : ''}`,
+                price: price,
+                qty: 1,
+                proteinsUsed: selectedProteins
+            };
+
+            cart.push(customItem);
+            updateCartUI();
+            toggleCartDrawer();
+
+            // Reset builder
+            document.querySelectorAll('input[name="builder-protein"]').forEach(cb => cb.checked = false);
+            document.getElementById('side-boli').checked = false;
+            document.getElementById('side-corn').checked = false;
+            updateBuilderTotal();
+        }
+
+        // CART UI & LOGIC
+        function addToCart(itemId) {
+            const item = menuItems.find(m => m.id === itemId);
+            if (!item) return;
+
+            const existing = cart.find(c => c.id === itemId);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    protein: item.protein,
+                    proteins: item.proteins,
+                    qty: 1
+                });
+            }
+
+            updateCartUI();
+            toggleCartDrawer();
+        }
+
+        function updateCartQuantity(cartIndex, delta) {
+            if (cart[cartIndex]) {
+                cart[cartIndex].qty += delta;
+                if (cart[cartIndex].qty <= 0) {
+                    cart.splice(cartIndex, 1);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const countBadge = document.getElementById('cart-count-badge');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const totalEl = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('btn-proceed-checkout');
+
+            container.innerHTML = '';
+            let subtotal = 0;
+            let totalCount = 0;
+
+            cart.forEach((item, index) => {
+                subtotal += item.price * item.qty;
+                totalCount += item.qty;
+
+                const itemHtml = `
+                    <div class="bg-neutral-900 p-3.5 rounded-xl border border-neutral-800 flex items-center justify-between gap-3">
+                        <div class="flex-grow">
+                            <h4 class="font-bold text-white text-sm">${item.name}</h4>
+                            <p class="text-xs text-gold font-semibold mt-0.5">£${item.price.toFixed(2)}</p>
+                            ${item.desc ? `<p class="text-[10px] text-neutral-400 mt-1">${item.desc}</p>` : ''}
+                        </div>
+                        <div class="flex items-center gap-2 bg-neutral-950 px-2.5 py-1 rounded-lg border border-neutral-800">
+                            <button onclick="updateCartQuantity(${index}, -1)" class="text-neutral-400 hover:text-white text-xs p-1">-</button>
+                            <span class="text-xs font-bold text-white px-1">${item.qty}</span>
+                            <button onclick="updateCartQuantity(${index}, 1)" class="text-neutral-400 hover:text-white text-xs p-1">+</button>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += itemHtml;
+            });
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-neutral-500">
+                        <i class="fa-solid fa-utensils text-3xl mb-3 text-neutral-700"></i>
+                        <p class="text-sm">Your order is empty</p>
+                    </div>
+                `;
+            }
+
+            countBadge.innerText = totalCount;
+            subtotalEl.innerText = `£${subtotal.toFixed(2)}`;
+            totalEl.innerText = `£${subtotal.toFixed(2)}`;
+            checkoutBtn.disabled = cart.length === 0;
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cart-drawer');
+            const overlay = document.getElementById('cart-drawer-overlay');
+
+            if (drawer.classList.contains('translate-x-full')) {
+                drawer.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                drawer.classList.add('translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        // CHECKOUT & RECEIPT MODALS
+        function openCheckoutModal() {
+            toggleCartDrawer();
+            const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            document.getElementById('checkout-modal-total').innerText = `£${subtotal.toFixed(2)}`;
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        function handleOrderTypeChange() {
+            const type = document.getElementById('cust-type').value;
+            const addrContainer = document.getElementById('delivery-address-container');
+            const deliveryFeeEl = document.getElementById('cart-delivery-fee');
+            const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+
+            if (type === 'delivery') {
+                addrContainer.classList.remove('hidden');
+                document.getElementById('cust-address').required = true;
+                deliveryFeeEl.innerText = "£5.00";
+                document.getElementById('checkout-modal-total').innerText = `£${(subtotal + 5.00).toFixed(2)}`;
+            } else {
+                addrContainer.classList.add('hidden');
+                document.getElementById('cust-address').required = false;
+                deliveryFeeEl.innerText = "£0.00";
+                document.getElementById('checkout-modal-total').innerText = `£${subtotal.toFixed(2)}`;
+            }
+        }
+
+        function handleOrderSubmit(e) {
+            e.preventDefault();
+
+            // Deduct stock for ordered items
+            cart.forEach(item => {
+                if (item.protein) {
+                    proteinStock[item.protein] = Math.max(0, (proteinStock[item.protein] || 0) - item.qty);
+                } else if (item.proteins) {
+                    item.proteins.forEach(p => {
+                        proteinStock[p] = Math.max(0, (proteinStock[p] || 0) - item.qty);
+                    });
+                } else if (item.proteinsUsed) {
+                    item.proteinsUsed.forEach(p => {
+                        proteinStock[p] = Math.max(0, (proteinStock[p] || 0) - item.qty);
+                    });
+                }
+            });
+
+            // Re-render UI to reflect updated stock counts
+            renderMenu(currentCategory);
+            renderCustomBuilder();
+
+            // Prepare Order Summary
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const type = document.getElementById('cust-type').value;
+            const payment = document.getElementById('cust-payment').value;
+            const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const total = type === 'delivery' ? subtotal + 5.00 : subtotal;
+
+            const receiptHtml = `
+                <p><strong>Customer:</strong> ${name}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>Fulfilment:</strong> ${type.toUpperCase()}</p>
+                <p><strong>Payment:</strong> ${payment}</p>
+                <div class="border-t border-neutral-800 my-2 pt-2">
+                    <strong>Items Ordered:</strong>
+                    <ul class="list-disc pl-4 mt-1 space-y-1">
+                        ${cart.map(i => `<li>${i.name} x${i.qty} - £${(i.price * i.qty).toFixed(2)}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="border-t border-neutral-800 pt-2 font-bold text-gold flex justify-between">
+                    <span>Total Amount Paid/Due:</span>
+                    <span>£${total.toFixed(2)}</span>
+                </div>
+            `;
+
+            document.getElementById('receipt-details').innerHTML = receiptHtml;
+
+            // Clear Cart & Close Modals
+            cart = [];
+            updateCartUI();
+            closeCheckoutModal();
+
+            // Open Receipt
+            document.getElementById('receipt-modal').classList.remove('hidden');
+        }
+
+        function closeReceiptModal() {
+            document.getElementById('receipt-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
